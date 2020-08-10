@@ -1,11 +1,11 @@
 <?php
-    include __DIR__ . "/includes/dados.php";
+    include __DIR__ . "/includes/dados/_dados.php";
     include __DIR__ . '/includes/layout-functions.php';
+
     $estilo_escolhido = isset($_GET['estilo']) ? $_GET['estilo'] : null;
 
     $estilos = listar_estilos();
     $albuns = listar_albuns();
-
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -51,7 +51,9 @@
                             </p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="ver.php?codigo=<?=$codigo?>" class="btn btn-sm btn-outline-secondary">Abrir</a>
+                                    <a href="ver.php?codigo=<?=$codigo?>" class="btn btn-sm btn-outline-secondary">
+                                        Ver
+                                    </a>
                                 </div>
                                 <small class="text-muted">
                                     <?=$album['estilo']?>
