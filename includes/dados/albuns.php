@@ -18,14 +18,14 @@ function listar_albuns()
         [
             'titulo' => 'Adoniran Barbosa',
             'descricao' => 'Especial',
-            'capa' => 'https://lh3.googleusercontent.com/proxy/fborq7T7kU_HkWzdM-lDmnv-W3oW978IZHCwe2YnyzLCj31DF9go9c7tTYssHuscCWultObmCV3u2LX6D10kA20VA1m10bpINESHe1in8b3Hs-zpuDw-_h8',
+            'capa' => 'https://livreopiniaoportal.files.wordpress.com/2014/04/adoniranbarbosa.jpg',
             'estilo' => 'Samba'
         ],
         [
             'titulo' => 'Belo',
             'descricao' => 'Ao Vivo (2001)',
             'capa' => 'https://www.vagalume.com.br/belo/discografia/belo-ao-vivo.jpg',
-            'estilo' => 'pagode'
+            'estilo' => 'Pagode'
         ]
     ];
 }
