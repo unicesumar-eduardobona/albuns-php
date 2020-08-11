@@ -10,14 +10,21 @@ function retornar_subtitulo()
     return "Primeira tela PHP+HTML";
 }
 
-function criar_jumbotron($titulo, $descricao, array $estilos)
+function criar_jumbotron($titulo, $descricao, array $estilos, $escolha = null)
 {
     $lista_html = '<p>';
 
-    $lista_html .= '<a href="index.php" class="btn btn-primary btn-lg btn-outline-primary">Todos</a> ';
+    $class_active = ($escolha == null) ? ' active' : null;
+
+    $lista_html .= '<a href="index.php" class="btn btn-primary btn-lg btn-outline-primary %s">Todos</a> ';
+    $lista_html = sprintf($lista_html, $class_active);
+
     foreach ($estilos as $estilo) {
         $url = 'index.php?estilo=' . $estilo;
-        $lista_html .= "<a class='btn btn-primary btn-lg btn-outline-primary' href=\"$url\">$estilo</a> ";
+        $class_active = ($estilo == $escolha) ? ' active' : null;
+
+        $lista_html .= "<a class='btn btn-primary btn-lg btn-outline-primary %s' href='%s'>%s</a> ";
+        $lista_html = sprintf($lista_html, $class_active, $url, $estilo);
     }
     $lista_html .= '</p>';
 

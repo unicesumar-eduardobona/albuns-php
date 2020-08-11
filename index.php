@@ -2,7 +2,7 @@
     include __DIR__ . "/includes/dados/_dados.php";
     include __DIR__ . '/includes/layout-functions.php';
 
-    $estilo_escolhido = isset($_GET['estilo']) ? $_GET['estilo'] : null;
+    $estilo_escolhido = $_GET['estilo'] ?? null; // coalesce
 
     $estilos = listar_estilos();
     $albuns = listar_albuns();
@@ -21,8 +21,9 @@
     <?=criar_jumbotron(
             'Álbuns em Destaque',
             'Aproveite o tempo livre e curta uma boa música',
-            $estilos)
-    ?>
+            $estilos,
+            $estilo_escolhido
+    );?>
 
     <div class="album py-5 bg-light">
         <div class="container">

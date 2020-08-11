@@ -14,7 +14,7 @@ function listar_musicas($album = null)
             'estrelas' => 5
         ],
         [
-            'titulo' => 'Samba do Ernest',
+            'titulo' => 'Samba do Ernesto',
             'album' => 2,
             'estrelas' => 4
         ],
