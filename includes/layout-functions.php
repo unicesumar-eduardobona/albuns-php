@@ -12,38 +12,14 @@ function retornar_subtitulo()
 
 function criar_jumbotron($titulo, $descricao, array $estilos, $escolha = null)
 {
-    $lista_html = '<p>';
+    include __DIR__ . '/layout/templates/jumbotron.php';
+}
 
-    $class_active = ($escolha == null) ? ' active' : null;
-
-    $lista_html .= '<a href="index.php" class="btn btn-primary btn-lg btn-outline-primary %s">Todos</a> ';
-    $lista_html = sprintf($lista_html, $class_active);
-
-    foreach ($estilos as $estilo) {
-        $url = 'index.php?estilo=' . $estilo;
-        $class_active = ($estilo == $escolha) ? ' active' : null;
-
-        $lista_html .= "<a class='btn btn-primary btn-lg btn-outline-primary %s' href='%s'>%s</a> ";
-        $lista_html = sprintf($lista_html, $class_active, $url, $estilo);
+function criar_lista_albuns($albuns, $estilo_escolhido)
+{
+    foreach ($albuns as $codigo => $album) {
+        if ($estilo_escolhido == null || $album['estilo'] == $estilo_escolhido) {
+            include __DIR__ . '/layout/templates/lista_albuns.php';
+        }
     }
-    $lista_html .= '</p>';
-
-    $html = '
-    <section class="jumbotron text-center">
-        <div class="container">
-            <h1 class="jumbotron-heading">
-                %s
-            </h1>
-            <p class="lead text-muted">
-                %s
-            </p>
-
-            %s
-        </div>
-    </section>
-    ';
-
-    $html = sprintf($html, $titulo, $descricao, $lista_html);
-
-    return $html;
 }
