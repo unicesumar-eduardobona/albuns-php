@@ -28,7 +28,8 @@
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
-                <?php if (! in_array($estilo_escolhido, $estilos) && $estilo_escolhido != null): ?>
+                <?php // if (! in_array($estilo_escolhido, $estilos) && $estilo_escolhido != null): ?>
+                <?php if (existe_estilo($estilo_escolhido)===false): ?>
                     <div class="col-sm-12">
                         <div class="alert alert-danger" role="alert">
                             O estilo escolhido não foi encontrado

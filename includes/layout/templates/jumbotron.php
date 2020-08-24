@@ -16,6 +16,8 @@
 
             <?php
                 foreach ($estilos as $estilo):
+                    $estilo = $estilo['estilo'];
+
                     $url = 'index.php?estilo=' . $estilo;
                     $class_active = ($estilo == $escolha) ? ' active' : null;
             ?>
