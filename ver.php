@@ -2,11 +2,12 @@
     include __DIR__ . "/includes/dados/_dados.php";
     include __DIR__ . '/includes/layout-functions.php';
 
-    $estilo_escolhido = isset($_GET['estilo']) ? $_GET['estilo'] : null;
+    $estilo_escolhido = isset($_GET['estilo']) ? (int) $_GET['estilo'] : null;
 
     $estilos = listar_estilos();
 
     $codigo = $_GET['codigo'] ?? -1;
+    $codigo = (int) $codigo;
 
     $album = recuperar_album($codigo);
     $musicas = listar_musicas($codigo);
@@ -25,7 +26,7 @@
 
     <?=criar_jumbotron(
         $album['titulo'],
-        $album['descricao'],
+        $album['subtitulo'],
         $estilos,
         $album['estilo']
     );?>
@@ -33,7 +34,7 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4 p-0">
-                <img class="w-100 img img-fluid" src="<?=$album['capa']?>" alt="Capa do Álbum" />
+                <img class="w-100 img img-fluid" src="<?=$album['url_capa']?>" alt="Capa do Álbum" />
             </div>
             <div class="col-sm-8">
                 <div class="album p-2 bg-light">

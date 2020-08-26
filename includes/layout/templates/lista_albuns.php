@@ -1,10 +1,10 @@
 <div class="col-sm-6 col-md-4 col-lg-3">
     <div class="card mb-4 box-shadow">
-        <img class="card-img-top" src="<?=$album['capa']?>" alt="Card image cap">
+        <img class="card-img-top" src="<?=$album['url_capa']?>" alt="Card image cap">
         <div class="card-body">
             <p class="card-text">
                 <?=$album['titulo']?>:
-                <?=$album['descricao']?>
+                <?=$album['subtitulo']?>
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">

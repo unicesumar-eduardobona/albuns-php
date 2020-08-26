@@ -2,7 +2,7 @@
 
 function get_connection()
 {
-    $dbh = new PDO('mysql:host=db;dbname=albuns_php', 'unicesumar', 'unicesumar');
+    $dbh = new PDO('mysql:host=db;dbname=albuns_php;charset=utf8', 'unicesumar', 'unicesumar');
     return $dbh;
 }
 
