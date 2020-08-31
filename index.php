@@ -4,8 +4,11 @@
 
     $estilo_escolhido = $_GET['estilo'] ?? null; // coalesce
 
-    $estilos = listar_estilos();
-    $albuns = listar_albuns();
+    $estilosRepository = new Estilos();
+    $estilos = $estilosRepository->listarEstilos();
+
+    $albunsRepository = new Albuns();
+    $albuns = $albunsRepository->listarAlbuns();
 ?>
 <!doctype html>
 <html lang="pt-br">
@@ -29,7 +32,7 @@
         <div class="container">
             <div class="row">
                 <?php // if (! in_array($estilo_escolhido, $estilos) && $estilo_escolhido != null): ?>
-                <?php if (existe_estilo($estilo_escolhido)===false): ?>
+                <?php if ($estilosRepository->existeEstilo($estilo_escolhido)===false): ?>
                     <div class="col-sm-12">
                         <div class="alert alert-danger" role="alert">
                             O estilo escolhido não foi encontrado
