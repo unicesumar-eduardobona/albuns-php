@@ -74,7 +74,7 @@ class Musicas
             ],
         ];
 
-        if ($album) {
+        if ($album >= 0) {
             $musicas = array_filter($musicas, function ($musica) use ($album) {
                 if ($musica['album'] == $album) {
                     return true;

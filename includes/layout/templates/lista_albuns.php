@@ -8,7 +8,7 @@
             </p>
             <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                    <a href="ver.php?codigo=<?=$codigo?>" class="btn btn-sm btn-outline-secondary">
+                    <a href="ver.php?codigo=<?=$album['cod_album']?>" class="btn btn-sm btn-outline-secondary">
                         Ver
                     </a>
                 </div>

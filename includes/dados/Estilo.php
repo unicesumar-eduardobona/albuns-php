@@ -2,15 +2,15 @@
 
 class Estilo
 {
-    private $codigo;
+    private $codEstilo;
     private $estilo;
 
     public function __construct($data = [])
     {
         foreach ($data as $indice => $item) {
             switch ($indice) {
-                case 'codigo':
-                    $this->setCodigo($item);
+                case 'cod_estilo':
+                    $this->setCodigoEstilo($item);
                     break;
                 case 'estilo':
                     $this->setEstilo($item);
@@ -19,14 +19,14 @@ class Estilo
         }
     }
 
-    public function setCodigo($codigo)
+    public function setCodigoEstilo($codigo)
     {
-        $this->codigo = (int) $codigo;
+        $this->codEstilo = (int) $codigo;
     }
 
-    public function getCodigo()
+    public function getCodigoEstilo()
     {
-        return $this->codigo;
+        return $this->codigoEstilo;
     }
 
     public function setEstilo($estilo)

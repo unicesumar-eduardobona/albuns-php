@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class Connection
+ * Classe de conexão com o banco
+ * Possui pattern chamado singleton
+ */
 class Connection
 {
     private static $instance;

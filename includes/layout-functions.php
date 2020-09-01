@@ -17,7 +17,7 @@ function criar_jumbotron($titulo, $descricao, array $estilos, $escolha = null)
 
 function criar_lista_albuns($albuns, $estilo_escolhido)
 {
-    foreach ($albuns as $codigo => $album) {
+    foreach ($albuns as $album) {
         if ($estilo_escolhido == null || $album['estilo'] == $estilo_escolhido) {
             include __DIR__ . '/layout/templates/lista_albuns.php';
         }

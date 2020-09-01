@@ -4,13 +4,17 @@
 
     $estilo_escolhido = isset($_GET['estilo']) ? (int) $_GET['estilo'] : null;
 
-    $estilos = listar_estilos();
+    $estilosRepository = new Estilos();
+    $estilos = $estilosRepository->listarEstilos();
 
     $codigo = $_GET['codigo'] ?? -1;
     $codigo = (int) $codigo;
 
-    $album = recuperar_album($codigo);
-    $musicas = listar_musicas($codigo);
+    $albunsRepository = new Albuns();
+    $album = $albunsRepository->recuperarAlbum($codigo);
+
+    $musicasRepository = new Musicas();
+    $musicas = $musicasRepository->listarMusicas($codigo);
 ?>
 <!doctype html>
 <html lang="pt-br">
