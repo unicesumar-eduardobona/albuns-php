@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: db
--- Tempo de geração: 01/09/2020 às 23:35
+-- Tempo de geração: 08/09/2020 às 23:49
 -- Versão do servidor: 10.4.12-MariaDB-1:10.4.12+maria~bionic
 -- Versão do PHP: 7.4.5
 
@@ -20,6 +20,27 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `albuns_php`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `admin`
+--
+
+CREATE TABLE `admin` (
+  `idAdmin` int(11) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `senha` varchar(255) NOT NULL,
+  `ativo` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Despejando dados para a tabela `admin`
+--
+
+INSERT INTO `admin` (`idAdmin`, `email`, `senha`, `ativo`) VALUES
+(1, 'turma.si@unicesumar.edu.br', '4e30f09dcde57beb4aa37c04a9e3ef51da66e431', 1),
+(2, 'ead@eduardobona.com.br', 'e9583c03502dfb5a7c71fc2343c9fdd1f1665c11', 1);
 
 -- --------------------------------------------------------
 
@@ -71,6 +92,13 @@ INSERT INTO `estilo` (`cod_estilo`, `estilo`) VALUES
 --
 
 --
+-- Índices de tabela `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`idAdmin`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
 -- Índices de tabela `album`
 --
 ALTER TABLE `album`
@@ -87,6 +115,12 @@ ALTER TABLE `estilo`
 --
 -- AUTO_INCREMENT de tabelas apagadas
 --
+
+--
+-- AUTO_INCREMENT de tabela `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `album`
