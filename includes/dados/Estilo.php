@@ -1,4 +1,5 @@
 <?php
+namespace Dados;
 
 class Estilo
 {

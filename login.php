@@ -1,7 +1,9 @@
 <?php
-
 include __DIR__.'/vendor/autoload.php';
-include __DIR__ . "/includes/dados/_dados.php";
+
+//"zendframework/zend-authentication": "^2.7",
+//        "zendframework/zend-session": "^2.9"
+
 
 if (isset($_POST['email']) and isset($_POST['senha'])) {
     $usuario = $_POST['email'];

@@ -1,6 +1,6 @@
 <?php
     include __DIR__.'/vendor/autoload.php';
-    include __DIR__ . "/includes/dados/_dados.php";
+
     include __DIR__ . '/includes/layout-functions.php';
 
     $autenticacaoService = new \Zend\Authentication\AuthenticationService();
@@ -10,10 +10,10 @@
 
     $estilo_escolhido = $_GET['estilo'] ?? null; // coalesce
 
-    $estilosRepository = new Estilos();
+    $estilosRepository = new \Dados\Estilos();
     $estilos = $estilosRepository->listarEstilos();
 
-    $albunsRepository = new Albuns();
+    $albunsRepository = new \Dados\Albuns();
     $albuns = $albunsRepository->listarAlbuns();
 ?>
 <!doctype html>

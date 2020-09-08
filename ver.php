@@ -1,6 +1,13 @@
 <?php
+    include __DIR__.'/vendor/autoload.php';
+
     include __DIR__ . "/includes/dados/_dados.php";
     include __DIR__ . '/includes/layout-functions.php';
+
+    $autenticacaoService = new \Zend\Authentication\AuthenticationService();
+    if (! $autenticacaoService->hasIdentity()) {
+        return header('location: login.php');
+    }
 
     $estilo_escolhido = isset($_GET['estilo']) ? (int) $_GET['estilo'] : null;
 

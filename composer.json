@@ -1,12 +1,12 @@
 {
-    "require": {
-        "zendframework/zend-authentication": "^2.7",
-        "zendframework/zend-session": "^2.9",
-        "zendframework/zend-db": "^2.11"
-    },
     "autoload": {
         "psr-4" : {
-            "Autenticacao\\": "includes/autenticacao/"
+            "Autenticacao\\": "includes/autenticacao/",
+            "Dados\\": "includes/dados/"
         }
+    },
+    "require": {
+        "zendframework/zend-authentication": "^2.7",
+        "zendframework/zend-session": "^2.9"
     }
 }

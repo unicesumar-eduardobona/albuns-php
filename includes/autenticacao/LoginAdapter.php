@@ -1,7 +1,8 @@
 <?php
 namespace Autenticacao;
 
-use Zend\Authentication\Adapter\AbstractAdapter;
+include_once __DIR__ . "/../dados/Connection.php";
+
 use Zend\Authentication\Adapter\AdapterInterface;
 use Zend\Authentication\Result;
 
@@ -9,7 +10,6 @@ class LoginAdapter implements AdapterInterface
 {
     private $usuario;
     private $senha;
-    private $senhaDesejada = '4e30f09dcde57beb4aa37c04a9e3ef51da66e431';
 
     /**
      * Instancie este adaptador com usuário e senha
@@ -32,10 +32,16 @@ class LoginAdapter implements AdapterInterface
      */
     public function authenticate()
     {
-        $usuarioCorreto = ($this->usuario == 'turma.si@unicesumar.edu.br');
-        $senhaCorreta = ($this->senha == $this->senhaDesejada);
+        $conn = \Dados\Connection::getInstance()->connection;
+        $sql = "SELECT * FROM admin WHERE email=:email and senha=:senha";
+        $sth = $conn->prepare($sql);
 
-        if ($usuarioCorreto && $senhaCorreta) {
+        $sth->execute([
+            ':email' => $this->usuario,
+            ':senha' => $this->senha
+        ]);
+
+        if($sth->rowCount() == 1){
             // login passou
             // retorna um resultado válido
             return new Result(Result::SUCCESS, $this->usuarioToArray());

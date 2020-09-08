@@ -1,6 +1,7 @@
 <?php
+namespace Dados;
 
-include_once "Connection.php";
+//include_once "Connection.php";
 
 class Musicas
 {

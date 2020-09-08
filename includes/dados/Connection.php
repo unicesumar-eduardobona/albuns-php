@@ -1,4 +1,5 @@
 <?php
+namespace Dados;
 
 /**
  * Class Connection
@@ -12,7 +13,7 @@ class Connection
 
     public function __construct()
     {
-        $this->connection = new PDO('mysql:host=db;dbname=albuns_php;charset=utf8', 'unicesumar', 'unicesumar');
+        $this->connection = new \PDO('mysql:host=db;dbname=albuns_php;charset=utf8', 'unicesumar', 'unicesumar');
     }
 
     public static function getInstance()

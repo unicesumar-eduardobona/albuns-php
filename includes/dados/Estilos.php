@@ -1,7 +1,8 @@
 <?php
+namespace Dados;
 
-include_once "Connection.php";
-include_once "Estilo.php";
+//include_once "Connection.php";
+//include_once "Estilo.php";
 
 class Estilos
 {
