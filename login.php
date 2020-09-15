@@ -33,17 +33,17 @@ if (isset($_POST['email']) and isset($_POST['senha'])) {
     $erro = $auth->getMessages()[0];
 }
 
-include __DIR__ . '/includes/layout-functions.php';
+include __DIR__ . '/src/layout-functions.php';
 
 ?>
 <!doctype html>
 <html lang="pt-br">
 
-<?php include __DIR__ . "/includes/layout/head.php"; ?>
+<?php include __DIR__ . "/src/layout/head.php"; ?>
 
 <body>
 
-<?php include __DIR__ . "/includes/layout/header.php"; ?>
+<?php include __DIR__ . "/src/layout/header.php"; ?>
 
 <main role="main" class="py-5 container">
     <div class="col-md-6 offset-md-3">
@@ -71,7 +71,7 @@ include __DIR__ . '/includes/layout-functions.php';
     </div>
 </main>
 
-<?php include __DIR__ . "/includes/layout/footer.php"; ?>
+<?php include __DIR__ . "/src/layout/footer.php"; ?>
 
 </body>
 </html>

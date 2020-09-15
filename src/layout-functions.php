@@ -10,10 +10,7 @@ function retornar_subtitulo()
     return "Primeira tela PHP+HTML";
 }
 
-function criar_jumbotron($titulo, $descricao, array $estilos, $escolha = null)
-{
-    include __DIR__ . '/layout/templates/jumbotron.php';
-}
+
 
 function criar_lista_albuns($albuns, $estilo_escolhido)
 {

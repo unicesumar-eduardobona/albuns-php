@@ -33,7 +33,7 @@ class LoginAdapter implements AdapterInterface
     public function authenticate()
     {
         $conn = \Dados\Connection::getInstance()->connection;
-        $sql = "SELECT * FROM admin WHERE email=:email and senha=:senha";
+        $sql = "SELECT * FROM usuario WHERE email=:email and senha=:senha";
         $sth = $conn->prepare($sql);
 
         $sth->execute([

@@ -1,8 +1,9 @@
 {
     "autoload": {
         "psr-4" : {
-            "Autenticacao\\": "includes/autenticacao/",
-            "Dados\\": "includes/dados/"
+            "App\\": "src/app",
+            "Autenticacao\\": "src/autenticacao/",
+            "Dados\\": "src/dados/"
         }
     },
     "require": {

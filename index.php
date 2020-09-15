@@ -1,43 +1,32 @@
 <?php
-    include __DIR__.'/vendor/autoload.php';
+include __DIR__.'/vendor/autoload.php';
 
-    include __DIR__ . '/includes/layout-functions.php';
+$index = new App\Index();
+$vars = $index->index();
 
-    $autenticacaoService = new \Zend\Authentication\AuthenticationService();
-    if (! $autenticacaoService->hasIdentity()) {
-        return header('location: login.php');
-    }
-
-    $estilo_escolhido = $_GET['estilo'] ?? null; // coalesce
-
-    $estilosRepository = new \Dados\Estilos();
-    $estilos = $estilosRepository->listarEstilos();
-
-    $albunsRepository = new \Dados\Albuns();
-    $albuns = $albunsRepository->listarAlbuns();
 ?>
 <!doctype html>
 <html lang="pt-br">
 
-<?php include __DIR__ . "/includes/layout/head.php"; ?>
+<?=$index->imprimirHead()?>
 
 <body>
 
-<?php include __DIR__ . "/includes/layout/header.php"; ?>
+<?=$index->imprimirHeader()?>
 
 <main role="main">
 
-    <?=criar_jumbotron(
-            'Álbuns em Destaque',
-            'Aproveite o tempo livre e curta uma boa música',
-            $estilos,
-            $estilo_escolhido
-    );?>
+    <?=$index->imprimirJumbotron(
+        'Álbuns em Destaque',
+        'Aproveite o tempo livre e curta uma boa música',
+        $vars['estilos'],
+        $vars['estilo_escolhido']
+    )?>
 
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
-                <?php // if (! in_array($estilo_escolhido, $estilos) && $estilo_escolhido != null): ?>
+                <?php /*
                 <?php if ($estilosRepository->existeEstilo($estilo_escolhido)===false): ?>
                     <div class="col-sm-12">
                         <div class="alert alert-danger" role="alert">
@@ -45,9 +34,12 @@
                         </div>
                     </div>
                 <?php endif;?>
+                */?>
 
-
-                <?=criar_lista_albuns($albuns, $estilo_escolhido)?>
+                <?=$index->imprimirListaAlbuns(
+                    $vars['albuns'],
+                    $vars['estilo_escolhido']
+                )?>
 
             </div>
         </div>
@@ -55,7 +47,7 @@
 
 </main>
 
-<?php include __DIR__ . "/includes/layout/footer.php"; ?>
+<?=$index->imprimirFooter()?>
 
 </body>
 </html>
