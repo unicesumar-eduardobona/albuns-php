@@ -30,7 +30,7 @@ class Index extends LayoutAbstract
 
     public function ver()
     {
-        $this->verificaLogin();
+        $identity = $this->verificaLogin();
 
         $estilo_escolhido = isset($_GET['estilo']) ? (int) $_GET['estilo'] : null;
 
@@ -44,7 +44,7 @@ class Index extends LayoutAbstract
         $album = $albunsRepository->recuperarAlbum($codigo);
 
         $musicasRepository = new Musicas();
-        $musicas = $musicasRepository->listarMusicas($codigo);
+        $musicas = $musicasRepository->listarMusicas($codigo, $identity['cod_usuario']);
 
         return [
             'estilos' => $estilos,
@@ -59,5 +59,7 @@ class Index extends LayoutAbstract
         if (! $autenticacaoService->hasIdentity()) {
             return header('location: login.php');
         }
+
+        return $autenticacaoService->getIdentity();
     }
 }

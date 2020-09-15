@@ -29,15 +29,14 @@ $controller->imprimirLayoutInicio();
                             <ul class="list-group w-100">
                                 <?php foreach ($vars['musicas'] as $musica): ?>
                                     <li class="list-group-item">
-                                        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                                        <div class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="d-flex w-100 justify-content-between">
                                                 <h5 class="mb-1">
                                                     <?=$musica['titulo']?>
                                                 </h5>
-                                                <small>há 2 semanas</small>
                                             </div>
-                                            <small>5 estrelas</small>
-                                        </a>
+                                            <small><?=\Dados\Estrela::converterEstrelasImagem($musica['voto'], $musica['cod_album'])?></small>
+                                        </div>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>

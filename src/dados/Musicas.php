@@ -1,89 +1,23 @@
 <?php
 namespace Dados;
 
-//include_once "Connection.php";
-
 class Musicas
 {
-    public function listarMusicas($album = null)
+    public function listarMusicas($album, $codUsuario)
     {
-        $musicas = [
-            [
-                'titulo' => 'Saudosa Maloca',
-                'album' => 2,
-                'estrelas' => 5
-            ],
-            [
-                'titulo' => 'Samba do Ernesto',
-                'album' => 2,
-                'estrelas' => 4
-            ],
-            [
-                'titulo' => 'Trem das Onze',
-                'album' => 2,
-                'estrelas' => 5
-            ],
-            [
-                'titulo' => 'Tiro ao Álvaro',
-                'album' => 2,
-                'estrelas' => 4
-            ],
-            [
-                'titulo' => 'Moleque Atrevido',
-                'album' => 1,
-                'estrelas' => 5
-            ],
-            [
-                'titulo' => 'Malandro',
-                'album' => 1,
-                'estrelas' => 5
-            ],
-            [
-                'titulo' => 'Falsa Consideração',
-                'album' => 1,
-                'estrelas' => 5
-            ],
-            [
-                'titulo' => 'Coisinha tão bonitinha',
-                'album' => 1,
-                'estrelas' => 5
-            ],
-            [
-                'titulo' => 'Ser Feliz De Novo',
-                'album' => 3,
-                'estrelas' => 5
-            ],
-            [
-                'titulo' => 'Resumo de Felicidade',
-                'album' => 3,
-                'estrelas' => 4
-            ],
-            [
-                'titulo' => 'Um Dia, Um Adeus',
-                'album' => 3,
-                'estrelas' => 4
-            ],
-            [
-                'titulo' => 'Antes de Dizer Adeus / Farol das Estrelas',
-                'album' => 3,
-                'estrelas' => 5
-            ],
-            [
-                'titulo' => 'Desafio',
-                'album' => 3,
-                'estrelas' => 5
-            ],
-        ];
+        $conn = Connection::getInstance()->connection;
+        $sql = 'SELECT musica.*, voto from musica left join estrela
+            on (musica.cod_musica = estrela.cod_musica
+                and estrela.cod_usuario = :cod_usuario) 
+            where cod_album = :cod_album
+            ';
 
-        if ($album >= 0) {
-            $musicas = array_filter($musicas, function ($musica) use ($album) {
-                if ($musica['album'] == $album) {
-                    return true;
-                }
-                return false;
-            });
-        }
+        $sth = $conn->prepare($sql);
+        $sth->execute([
+            ':cod_album' => $album,
+            ':cod_usuario' => $codUsuario
+        ]);
 
-        return $musicas;
+        return $sth->fetchAll(\PDO::FETCH_ASSOC);
     }
 }

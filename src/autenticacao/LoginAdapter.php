@@ -33,7 +33,7 @@ class LoginAdapter implements AdapterInterface
     public function authenticate()
     {
         $conn = \Dados\Connection::getInstance()->connection;
-        $sql = "SELECT * FROM usuario WHERE email=:email and senha=:senha";
+        $sql = "SELECT cod_usuario, email FROM usuario WHERE email=:email and senha=:senha";
         $sth = $conn->prepare($sql);
 
         $sth->execute([
@@ -42,22 +42,13 @@ class LoginAdapter implements AdapterInterface
         ]);
 
         if($sth->rowCount() == 1){
-            // login passou
-            // retorna um resultado válido
-            return new Result(Result::SUCCESS, $this->usuarioToArray());
+            $usuarioLogado = $sth->fetchAll(\PDO::FETCH_ASSOC);
+            return new Result(Result::SUCCESS, $usuarioLogado[0]);
         }
 
         // login não passou
         // retorna um resultado inválido com mensagem de erro
-        return new Result(Result::FAILURE, $this->usuarioToArray(),
+        return new Result(Result::FAILURE, ['usuario' => $this->usuario],
             ['Usuário ou senha inválidos. Tente novamente.']);
-    }
-
-    /**
-     * @return array
-     */
-    private function usuarioToArray()
-    {
-        return ['usuario' => $this->usuario];
     }
 }
