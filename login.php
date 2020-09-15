@@ -1,60 +1,22 @@
 <?php
 include __DIR__.'/vendor/autoload.php';
 
-//"zendframework/zend-authentication": "^2.7",
-//        "zendframework/zend-session": "^2.9"
-
-
-if (isset($_POST['email']) and isset($_POST['senha'])) {
-    $usuario = $_POST['email'];
-    $senha = $_POST['senha'];
-
-    // instancia o adaptador de login com usuário e senha
-    $login = new \Autenticacao\LoginAdapter($usuario, $senha);
-
-    // instancia o serviço de autenticação
-    $authService = new \Zend\Authentication\AuthenticationService();
-
-    // conecta o serviço ao adaptador criado para a aplicação
-    $authService->setAdapter($login);
-
-    // conecta o serviço a sessão (session para persistir login)
-    $authService->setStorage(new \Zend\Authentication\Storage\Session());
-
-    $auth = $authService->authenticate();
-    if ($auth->isValid()) {
-        // passou no login
-        // redireciona a tela
-        return header('location: index.php');
-    }
-
-    // não passou no login
-    // recebe mensagem de erro e mostra novamente a tela
-    $erro = $auth->getMessages()[0];
-}
-
-include __DIR__ . '/src/layout-functions.php';
-
+$controller = new \App\Login();
+$vars = $controller->login();
 ?>
-<!doctype html>
-<html lang="pt-br">
 
-<?php include __DIR__ . "/src/layout/head.php"; ?>
-
-<body>
-
-<?php include __DIR__ . "/src/layout/header.php"; ?>
+<?php $controller->imprimirLayoutInicio();?>
 
 <main role="main" class="py-5 container">
     <div class="col-md-6 offset-md-3">
         <form action="" method="post" class="form-signin">
             <h1 class="h3 mb-3 font-weight-normal">Entrar</h1>
 
-            <?php if(isset($erro)): ?>
+            <?php if(isset($vars['erro'])): ?>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="alert alert-danger">
-                        <?=$erro?>
+                        <?=$vars['erro']?>
                     </div>
                 </div>
             </div>
@@ -71,7 +33,4 @@ include __DIR__ . '/src/layout-functions.php';
     </div>
 </main>
 
-<?php include __DIR__ . "/src/layout/footer.php"; ?>
-
-</body>
-</html>
+<?php $controller->imprimirLayoutTermino()?>

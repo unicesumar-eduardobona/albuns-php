@@ -1,22 +1,15 @@
 <?php
 include __DIR__.'/vendor/autoload.php';
 
-$index = new App\Index();
-$vars = $index->index();
-
+$controller = new App\Index();
+$vars = $controller->index();
 ?>
-<!doctype html>
-<html lang="pt-br">
 
-<?=$index->imprimirHead()?>
-
-<body>
-
-<?=$index->imprimirHeader()?>
+<?php $controller->imprimirLayoutInicio();?>
 
 <main role="main">
 
-    <?=$index->imprimirJumbotron(
+    <?=$controller->imprimirJumbotron(
         'Álbuns em Destaque',
         'Aproveite o tempo livre e curta uma boa música',
         $vars['estilos'],
@@ -26,17 +19,16 @@ $vars = $index->index();
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
-                <?php /*
-                <?php if ($estilosRepository->existeEstilo($estilo_escolhido)===false): ?>
+
+                <?php if ($vars['estilo_escolhido'] === false): ?>
                     <div class="col-sm-12">
                         <div class="alert alert-danger" role="alert">
                             O estilo escolhido não foi encontrado
                         </div>
                     </div>
                 <?php endif;?>
-                */?>
 
-                <?=$index->imprimirListaAlbuns(
+                <?=$controller->imprimirListaAlbuns(
                     $vars['albuns'],
                     $vars['estilo_escolhido']
                 )?>
@@ -47,7 +39,4 @@ $vars = $index->index();
 
 </main>
 
-<?=$index->imprimirFooter()?>
-
-</body>
-</html>
+<?php $controller->imprimirLayoutTermino()?>

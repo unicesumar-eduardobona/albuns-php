@@ -3,6 +3,16 @@ namespace App;
 
 abstract class LayoutAbstract
 {
+    public function imprimirLayoutInicio()
+    {
+        return include __DIR__ . "/../../view/layout/layoutInicio.php";
+    }
+
+    public function imprimirLayoutTermino()
+    {
+        return include __DIR__ . "/../../view/layout/layoutTermino.php";
+    }
+
     public function imprimirHead()
     {
         return include __DIR__ . "/../../view/layout/head.php";
@@ -26,7 +36,7 @@ abstract class LayoutAbstract
     public function imprimirListaAlbuns($albuns, $estilo_escolhido)
     {
         foreach ($albuns as $album) {
-            if ($estilo_escolhido == null || $album['estilo'] == $estilo_escolhido) {
+            if ($estilo_escolhido == null || $album['cod_estilo'] == $estilo_escolhido) {
                 include __DIR__ . '/../../view/layout/templates/lista_albuns.php';
             }
         }

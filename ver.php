@@ -1,58 +1,33 @@
 <?php
-    include __DIR__.'/vendor/autoload.php';
+include __DIR__.'/vendor/autoload.php';
 
-    include __DIR__ . "/includes/dados/_dados.php";
-    include __DIR__ . '/includes/layout-functions.php';
+$controller = new \App\Index();
+$vars = $controller->ver();
 
-    $autenticacaoService = new \Zend\Authentication\AuthenticationService();
-    if (! $autenticacaoService->hasIdentity()) {
-        return header('location: login.php');
-    }
-
-    $estilo_escolhido = isset($_GET['estilo']) ? (int) $_GET['estilo'] : null;
-
-    $estilosRepository = new Estilos();
-    $estilos = $estilosRepository->listarEstilos();
-
-    $codigo = $_GET['codigo'] ?? -1;
-    $codigo = (int) $codigo;
-
-    $albunsRepository = new Albuns();
-    $album = $albunsRepository->recuperarAlbum($codigo);
-
-    $musicasRepository = new Musicas();
-    $musicas = $musicasRepository->listarMusicas($codigo);
+$controller->imprimirLayoutInicio();
 ?>
-<!doctype html>
-<html lang="pt-br">
-
-<?php include __DIR__ . "/includes/layout/head.php"; ?>
-
-<body>
-
-<?php include __DIR__ . "/includes/layout/header.php"; ?>
 
 <main role="main" class="pb-3">
-<?php if ($album): ?>
+<?php if ($vars['album']): ?>
 
-    <?=criar_jumbotron(
-        $album['titulo'],
-        $album['subtitulo'],
-        $estilos,
-        $album['estilo']
-    );?>
+    <?=$controller->imprimirJumbotron(
+        $vars['album']['titulo'],
+        $vars['album']['subtitulo'],
+        $vars['estilos'],
+        $vars['album']['cod_estilo']
+    )?>
 
     <div class="container">
         <div class="row">
             <div class="col-sm-4 p-0">
-                <img class="w-100 img img-fluid" src="<?=$album['url_capa']?>" alt="Capa do Álbum" />
+                <img class="w-100 img img-fluid" src="<?=$vars['album']['url_capa']?>" alt="Capa do Álbum" />
             </div>
             <div class="col-sm-8">
                 <div class="album p-2 bg-light">
                     <div class="container">
                         <div class="row">
                             <ul class="list-group w-100">
-                                <?php foreach ($musicas as $musica): ?>
+                                <?php foreach ($vars['musicas'] as $musica): ?>
                                     <li class="list-group-item">
                                         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="d-flex w-100 justify-content-between">
@@ -84,7 +59,4 @@
 <?php endif; ?>
 </main>
 
-<?php include __DIR__ . "/includes/layout/footer.php"; ?>
-
-</body>
-</html>
+<?php $controller->imprimirLayoutTermino()?>

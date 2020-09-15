@@ -9,7 +9,7 @@ class Estilos
     public function existeEstilo($estilo_escolhido)
     {
         $conn = Connection::getInstance()->connection;
-        $sql = 'SELECT count(*) from estilo where cod_estilo = :cod_estilo';
+        $sql = 'SELECT cod_estilo from estilo where cod_estilo = :cod_estilo';
         $sth = $conn->prepare($sql);
         $sth->execute([':cod_estilo' => $estilo_escolhido]);
 

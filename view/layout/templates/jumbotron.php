@@ -15,14 +15,12 @@
             <a href="index.php" class="btn btn-primary btn-lg btn-outline-primary <?=$class_todos_active?>">Todos</a>
 
             <?php
-                foreach ($estilos as $estilo): /** @var $estilo Estilo */
-                    $estilo = $estilo->getEstilo();
-
-                    $url = 'index.php?estilo=' . $estilo;
-                    $class_active = ($estilo == $escolha) ? ' active' : null;
+                foreach ($estilos as $estilo): /** @var $estilo \Dados\Estilo */
+                    $url = 'index.php?estilo=' . $estilo->getCodEstilo();
+                    $class_active = ($estilo->getCodEstilo() == $escolha) ? ' active' : null;
             ?>
             <a class='btn btn-primary btn-lg btn-outline-primary <?=$class_active?>' href='<?=$url?>'>
-                <?=$estilo?>
+                <?=$estilo->getEstilo()?>
             </a>
             <?php endforeach; ?>
 

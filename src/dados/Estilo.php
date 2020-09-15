@@ -11,7 +11,7 @@ class Estilo
         foreach ($data as $indice => $item) {
             switch ($indice) {
                 case 'cod_estilo':
-                    $this->setCodigoEstilo($item);
+                    $this->setCodEstilo($item);
                     break;
                 case 'estilo':
                     $this->setEstilo($item);
@@ -20,14 +20,14 @@ class Estilo
         }
     }
 
-    public function setCodigoEstilo($codigo)
+    public function setCodEstilo($codigo)
     {
         $this->codEstilo = (int) $codigo;
     }
 
-    public function getCodigoEstilo()
+    public function getCodEstilo()
     {
-        return $this->codigoEstilo;
+        return $this->codEstilo;
     }
 
     public function setEstilo($estilo)
