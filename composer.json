@@ -1,0 +1,13 @@
+{
+    "autoload": {
+        "psr-4" : {
+            "App\\": "src/app",
+            "Autenticacao\\": "src/autenticacao/",
+            "Dados\\": "src/dados/"
+        }
+    },
+    "require": {
+        "zendframework/zend-authentication": "^2.7",
+        "zendframework/zend-session": "^2.9"
+    }
+}

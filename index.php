@@ -1,34 +1,26 @@
 <?php
-    include __DIR__ . "/includes/dados/_dados.php";
-    include __DIR__ . '/includes/layout-functions.php';
+include __DIR__.'/vendor/autoload.php';
 
-    $estilo_escolhido = $_GET['estilo'] ?? null; // coalesce
-
-    $estilos = listar_estilos();
-    $albuns = listar_albuns();
+$controller = new App\Index();
+$vars = $controller->index();
 ?>
-<!doctype html>
-<html lang="pt-br">
 
-<?php include __DIR__ . "/includes/layout/head.php"; ?>
-
-<body>
-
-<?php include __DIR__ . "/includes/layout/header.php"; ?>
+<?php $controller->imprimirLayoutInicio();?>
 
 <main role="main">
 
-    <?=criar_jumbotron(
-            'Álbuns em Destaque',
-            'Aproveite o tempo livre e curta uma boa música',
-            $estilos,
-            $estilo_escolhido
-    );?>
+    <?=$controller->imprimirJumbotron(
+        'Álbuns em Destaque',
+        'Aproveite o tempo livre e curta uma boa música',
+        $vars['estilos'],
+        $vars['estilo_escolhido']
+    )?>
 
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
-                <?php if (! in_array($estilo_escolhido, $estilos) && $estilo_escolhido != null): ?>
+
+                <?php if ($vars['estilo_escolhido'] === false): ?>
                     <div class="col-sm-12">
                         <div class="alert alert-danger" role="alert">
                             O estilo escolhido não foi encontrado
@@ -36,8 +28,10 @@
                     </div>
                 <?php endif;?>
 
-
-                <?=criar_lista_albuns($albuns, $estilo_escolhido)?>
+                <?=$controller->imprimirListaAlbuns(
+                    $vars['albuns'],
+                    $vars['estilo_escolhido']
+                )?>
 
             </div>
         </div>
@@ -45,7 +39,4 @@
 
 </main>
 
-<?php include __DIR__ . "/includes/layout/footer.php"; ?>
-
-</body>
-</html>
+<?php $controller->imprimirLayoutTermino()?>
