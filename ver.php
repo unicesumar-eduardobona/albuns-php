@@ -35,7 +35,7 @@ $controller->imprimirLayoutInicio();
                                                     <?=$musica['titulo']?>
                                                 </h5>
                                             </div>
-                                            <small><?=\Dados\Estrela::converterEstrelasImagem($musica['voto'], $musica['cod_album'])?></small>
+                                            <small><?=\Dados\Estrela::converterEstrelasImagem($musica['voto'], $musica['cod_musica'])?></small>
                                         </div>
                                     </li>
                                 <?php endforeach; ?>

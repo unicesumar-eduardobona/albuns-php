@@ -3,6 +3,7 @@ namespace App;
 
 use Dados\Albuns;
 use Dados\Estilos;
+use Dados\Estrelas;
 use Dados\Musicas;
 
 class Index extends LayoutAbstract
@@ -51,6 +52,34 @@ class Index extends LayoutAbstract
             'album' => $album,
             'musicas' => $musicas
         ];
+    }
+
+    public function votar()
+    {
+        $identity = $this->verificaLogin();
+
+        $musica = (int) $_GET['musica'];
+        $voto = (int) $_GET['voto'];
+
+        if (empty($musica) or empty($voto)) {
+            // @todo tratar erro de voto
+            return false;
+        }
+
+        $estrelasRepository = new Estrelas();
+        $dados = [
+            'cod_musica' => $musica,
+            'cod_usuario' => $identity['cod_usuario'],
+            'voto' => $voto
+        ];
+        if ($estrelasRepository->existeVoto($musica,
+            $identity['cod_usuario'])) {
+            $estrelasRepository->atualizarEstrela($dados);
+        } else {
+            $estrelasRepository->cadastrarEstrela($dados);
+        }
+
+        header('location: index.php');
     }
 
     private function verificaLogin()
