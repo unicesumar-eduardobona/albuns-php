@@ -25,3 +25,24 @@ docker-compose exec php bash
 composer install
 ```
 
+Vai ser exibida a tela de login,
+Digite um email e uma senha válida e em seguida notará que NÃO FUNCIONARÁ.
+
+Por que?
+Porque você não importou ainda o banco de dados.
+
+Para importar o banco de dados, acesse o phpmyadmin através da url: http://localhost:9001/index.php digitando o usuário e senha do arquivo .env
+
+Depois clique na lateral esquerda no banco de dados "albuns_php"
+
+Agora você deverá importar um arquivo que está dentro da pasta dockerfiles/scripts/albuns_php.sql
+
+Para isso, clique na aba importar, selecione o arquivo mencionado e executar.
+
+Várias mensagens de sucesso serão exibidas e tabelas aparecerão na lista da esquerda do phpmyadmin.
+
+Agora sim!
+
+Volte para o projeto em http://localhost e digite o usuário com a senha.
+
+Espero que seja feito o login e tenha sucesso na execução do projeto!
