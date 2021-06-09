@@ -1,0 +1,8 @@
+{
+    "autoload": {
+        "psr-4" : {
+            "Controller\\": "src/controllers",
+            "Model\\": "src/models/"
+        }
+    }
+}

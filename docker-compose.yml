@@ -23,6 +23,31 @@ services:
       - MYSQL_USER
       - MYSQL_PASS
       - MYSQL_DATABASE
+
+  apache-api:
+    build:
+      context: ./dockerfiles/apache-api
+    volumes:
+      - "./api/:/var/www/htdocs"
+      - "./dockerfiles/apache-api/confs:/usr/local/apache2/conf/custom.conf.d"
+    ports:
+      - "8080:80"
+    depends_on:
+      - php-api
+  php-api:
+    build:
+      context: ./dockerfiles/php
+    volumes:
+      - "./api/:/var/www/htdocs"
+    ports:
+      - "9001:9000"
+    depends_on:
+      - db
+    environment:
+      - MYSQL_USER
+      - MYSQL_PASS
+      - MYSQL_DATABASE
+
   db:
     image: mariadb
     environment:
@@ -39,7 +64,7 @@ services:
     depends_on:
       - db
     ports:
-      - 9001:80
+      - 9009:80
 
 volumes:
   mysql_data:
