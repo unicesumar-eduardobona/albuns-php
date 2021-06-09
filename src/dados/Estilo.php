@@ -10,6 +10,7 @@ class Estilo
     {
         foreach ($data as $indice => $item) {
             switch ($indice) {
+                case 'codEstilo':
                 case 'cod_estilo':
                     $this->setCodEstilo($item);
                     break;
