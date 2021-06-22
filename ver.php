@@ -26,16 +26,32 @@ $controller->imprimirLayoutInicio();
                 <div class="album p-2 bg-light">
                     <div class="container">
                         <div class="row">
-                            <ul class="list-group w-100">
+                            <ul id="lista-musicas" class="list-group w-100">
                                 <?php foreach ($vars['musicas'] as $musica): ?>
-                                    <li class="list-group-item">
+                                    <li data-musica="<?=$musica['cod_musica']?>" class="list-group-item">
                                         <div class="list-group-item list-group-item-action flex-column align-items-start">
                                             <div class="d-flex w-100 justify-content-between">
                                                 <h5 class="mb-1">
                                                     <?=$musica['titulo']?>
                                                 </h5>
                                             </div>
-                                            <small><?=\Dados\Estrela::converterEstrelasImagem($musica['voto'], $musica['cod_musica'])?></small>
+                                            <small>
+                                                <a class="link-voto" data-voto="1" data-musica="<?=$musica['cod_musica']?>" href="#">
+                                                    <img width=40 src="https://images.emojiterra.com/mozilla/512px/2b50.png" />
+                                                </a>
+                                                <a class="link-voto" data-voto="2" data-musica="<?=$musica['cod_musica']?>" href="#">
+                                                    <img width=40 src="https://images.emojiterra.com/mozilla/512px/2b50.png" />
+                                                </a>
+                                                <a class="link-voto" data-voto="3" data-musica="<?=$musica['cod_musica']?>" href="#">
+                                                    <img width=40 src="https://images.emojiterra.com/mozilla/512px/2b50.png" />
+                                                </a>
+                                                <a class="link-voto" data-voto="4" data-musica="<?=$musica['cod_musica']?>" href="#">
+                                                    <img width=40 src="https://images.emojiterra.com/mozilla/512px/2b50.png" />
+                                                </a>
+                                                <a class="link-voto" data-voto="5" data-musica="<?=$musica['cod_musica']?>" href="#">
+                                                    <img width=40 src="https://images.emojiterra.com/mozilla/512px/2b50.png" />
+                                                </a>
+                                            </small>
                                         </div>
                                     </li>
                                 <?php endforeach; ?>
@@ -57,5 +73,53 @@ $controller->imprimirLayoutInicio();
 
 <?php endif; ?>
 </main>
+
+<script>
+    var links = document.querySelectorAll('a.link-voto');
+    for(i=0; i<links.length; i++){
+        links[i].addEventListener("click", function(e) {
+            e.preventDefault();
+            var voto = e.currentTarget.getAttribute('data-voto');
+            var musica = e.currentTarget.getAttribute('data-musica');
+
+            votos = recuperarVotos();
+            votos[musica] = voto;
+            localStorage.setItem('votos', JSON.stringify(votos));
+
+            atualizarVotos(musica, voto);
+        });
+    }
+
+    var musicas = document.querySelectorAll('ul#lista-musicas li');
+    var votos = recuperarVotos();
+
+    for (i=0; i<musicas.length; i++) {
+        var musica = musicas[i].getAttribute('data-musica');
+        var voto = votos[musica];
+
+        if (voto >= 1) {
+            atualizarVotos(musica, voto);
+        }
+    }
+
+    function recuperarVotos() {
+        votos = localStorage.getItem('votos') ?? '{}';
+        votos = JSON.parse(votos);
+        return votos;
+    }
+
+    function atualizarVotos(musica, voto) {
+        var elemento_li = document.querySelector('ul#lista-musicas li[data-musica="' + musica + '"]');
+        var imgs = elemento_li.querySelectorAll('img');
+        for (j=0; j<imgs.length; j++) {
+            var img = imgs[j];
+            if (j < voto) {
+                img.setAttribute('src', 'https://images.emojiterra.com/google/android-10/512px/2b50.png');
+            } else {
+                img.setAttribute('src', 'https://images.emojiterra.com/mozilla/512px/2b50.png');
+            }
+        }
+    }
+</script>
 
 <?php $controller->imprimirLayoutTermino()?>

@@ -3,7 +3,7 @@ namespace Model;
 
 class Musicas
 {
-    public function listarMusicas($album, $codUsuario)
+    public function listarMusicas($album, $codUsuario = 1)
     {
         $conn = Connection::getInstance()->connection;
         $sql = 'SELECT musica.*, voto from musica left join estrela

@@ -11,7 +11,7 @@ class Index extends LayoutAbstract
 {
     public function index()
     {
-        $this->verificaLogin();
+//        $this->verificaLogin();
 
 //         mover para API
 //        $estilosRepository = new \Dados\Estilos();
@@ -56,15 +56,9 @@ class Index extends LayoutAbstract
 
     public function ver()
     {
-        $identity = $this->verificaLogin();
-
         $estilo_escolhido = isset($_GET['estilo']) ? (int) $_GET['estilo'] : null;
 
-//        $estilosRepository = new Estilos();
-//        $estilos = $estilosRepository->listarEstilos();
-
-        // substituir por api
-        $estilosJson = '[{"codEstilo":2,"estilo":"Pagode"},{"codEstilo":1,"estilo":"Rock"},{"codEstilo":4,"estilo":"Samba"}]';
+        $estilosJson = file_get_contents('http://apache/api/estilos.php');
         $estilos = json_decode($estilosJson, true);
         $estilos = array_map(function($estilo) {
             return new Estilo($estilo);
@@ -73,18 +67,12 @@ class Index extends LayoutAbstract
         $codigo = $_GET['codigo'] ?? -1;
         $codigo = (int) $codigo;
 
-//        $albunsRepository = new Albuns();
-//        $album = $albunsRepository->recuperarAlbum($codigo);
-
         // substituir por api
-        $albumJson = '{"cod_estilo":"1","0":"1","cod_album":"5","1":"5","titulo":"Renato Russo","2":"Renato Russo","subtitulo":"Presente","3":"Presente","url_capa":"http:\/\/renatorusso.com.br\/wp-content\/uploads\/2016\/03\/presente.jpg","4":"http:\/\/renatorusso.com.br\/wp-content\/uploads\/2016\/03\/presente.jpg","estilo":"Rock","5":"Rock"}';
+        $albumJson = file_get_contents('http://apache/api/albuns.php');
         $album = json_decode($albumJson, true);
 
-//        $musicasRepository = new Musicas();
-//        $musicas = $musicasRepository->listarMusicas($codigo, $identity['cod_usuario']);
-
         // substituir por api
-        $musicasJson = '[{"cod_musica":"5","cod_album":"1","titulo":"Moleque Atrevido","voto":null},{"cod_musica":"6","cod_album":"1","titulo":"Malandro","voto":null},{"cod_musica":"7","cod_album":"1","titulo":"Falsa Considera\u00e7\u00e3o","voto":null},{"cod_musica":"8","cod_album":"1","titulo":"Coisinha t\u00e3o bonitinha","voto":null}]';
+        $musicasJson = file_get_contents('http://apache/api/musicas.php?codigo='.$codigo);
         $musicas = json_decode($musicasJson, true);
 
         return [
